@@ -19,7 +19,7 @@ source:
     - build-static-lib.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win and py35]
   features:
     - vc9   # [win and py27]
@@ -28,10 +28,11 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - python      # [win]
     - cmake
-    - msinttypes  # [win]
+    - msinttypes  # [win and py<35]
 
 test:
   requires:

@@ -14,6 +14,8 @@ cd build
 cmake .. \
     -DCMAKE_INSTALL_PREFIX="$PREFIX" \
     -DCMAKE_PREFIX_PATH="$PREFIX" \
+    -DCMAKE_CXX="${CXX}" \
+    -DCMAKE_CC="${CC}" \
     -DCMAKE_POSITION_INDEPENDENT_CODE=1
 
 make -j $CPU_COUNT
