@@ -30,10 +30,11 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - python      # [win]
     - cmake
-    - msinttypes  # [win]
+    - msinttypes  # [win and py<35]
 
 test:
   requires:
