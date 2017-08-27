@@ -18,7 +18,7 @@ cmake .. \
     -DCMAKE_CC="${CC}" \
     -DCMAKE_POSITION_INDEPENDENT_CODE=1
 
-make -j $CPU_COUNT
+make -j${CPU_COUNT} ${VERBOSE_CM}
 
 # need to be in the root directory for this to run properly
 cd ..
