@@ -46,10 +46,18 @@ test:
 
 about:
   home: https://github.com/google/snappy
-  summary: A fast compressor/decompressor
   license: BSD 3-clause
   license_file: COPYING
   license_family: BSD
+  summary: A fast compressor/decompressor
+  description: |
+    Snappy is a compression/decompression library. It does not aim for maximum
+    compression, or compatibility with any other compression library; instead, it
+    aims for very high speeds and reasonable compression. For instance, compared to
+    the fastest mode of zlib, Snappy is an order of magnitude faster for most
+    inputs, but the resulting compressed files are anywhere from 20% to 100%
+    bigger.
+  dev_url: https://github.com/google/snappy
 
 extra:
   recipe-maintainers:
