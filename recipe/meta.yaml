@@ -22,23 +22,17 @@ source:
 
 build:
   number: {{ build }}
-  skip: true  # [win and py35]
   features:
-    - vc9   # [win and py27]
-    - vc10  # [win and py34]
-    - vc14  # [win and py>=35]
+    - vc{{ vc }}  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - python      # [win]
     - cmake
     - msinttypes  # [win and py<35]
 
 test:
-  requires:
-    - python {{ environ['PY_VER'] + '*' }}  # [win]
   commands:
     - test -e $PREFIX/include/snappy.h               # [unix]
     - test -e $PREFIX/include/snappy-stubs-public.h  # [unix]
