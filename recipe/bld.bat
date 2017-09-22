@@ -3,6 +3,9 @@ setlocal EnableDelayedExpansion
 mkdir build-dynamic
 cd build-dynamic
 
+set CFLAGS=
+set CXXFLAGS=
+
 cmake -G "NMake Makefiles" ^
     -DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
     -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
