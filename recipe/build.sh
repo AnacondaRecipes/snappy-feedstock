@@ -23,7 +23,7 @@ function build() {
         -DHAVE_LIBZ=FALSE -DHAVE_LIBLZO2=FALSE \
         $extra_args
 
-    make -j $CPU_COUNT
+    make -j${CPU_COUNT} ${VERBOSE_CM}
 
     # need to be in the root directory for this to run properly
     cd ..
