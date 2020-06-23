@@ -30,6 +30,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - make  # [unix]
     - cmake
     - msinttypes  # [win and vc<14]
 
