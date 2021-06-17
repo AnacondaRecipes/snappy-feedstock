@@ -13,7 +13,7 @@ source:
     # Have snappy-unittest not run the slow-ish microbenchmarks, but just
     # the quick correctness tests, without bothering with gflags (which didn't
     # work out of the box). This is the recommended method in the README.
-    - skip-microbenchmarks.patch
+    #- skip-microbenchmarks.patch
     # Name the static library snappy_static.lib on windows, to distinguish from
     # the dynamic library, since they have the same suffix there.
     # https://github.com/google/snappy/pull/57
@@ -33,6 +33,9 @@ requirements:
     - make  # [unix]
     - cmake
     - msinttypes  # [win and vc<14]
+    - patch  # [not win]
+    - m2-patch  # [win]
+    - git
 
 test:
   commands:
@@ -48,7 +51,7 @@ test:
 
 about:
   home: https://github.com/google/snappy
-  license: BSD 3-clause
+  license: BSD-3-clause AND CC-BY-3.0 AND MIT AND CC-BY AND Public Domain
   license_file: COPYING
   license_family: BSD
   summary: A fast compressor/decompressor
@@ -60,6 +63,7 @@ about:
     inputs, but the resulting compressed files are anywhere from 20% to 100%
     bigger.
   dev_url: https://github.com/google/snappy
+  doc_url: https://github.com/google/snappy/tree/master/docs
 
 extra:
   recipe-maintainers:
