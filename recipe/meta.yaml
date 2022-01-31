@@ -33,6 +33,8 @@ requirements:
     - make  # [unix]
     - cmake
     - msinttypes  # [win and vc<14]
+    - patch     # [not win]
+    - m2-patch  # [win]
 
 test:
   commands:
