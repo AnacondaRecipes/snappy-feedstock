@@ -11,6 +11,7 @@ source:
     sha256: {{ sha256 }}
     patches:
       - Add_inline.patch
+      - use-system-test-libs.patch  # [win]
 
   # these are git submodules
   - url: https://github.com/google/benchmark/archive/bf585a2789e30585b4e3ce6baf11ef2750b54677.tar.gz
