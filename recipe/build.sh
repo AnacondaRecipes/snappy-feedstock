@@ -5,7 +5,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     # at least for Travis's compiler, -O2 fails the unit tests
     export CXXFLAGS="${CXXFLAGS} -O1"
 else
-    export CXXFLAGS="${CXXFLAGS} -O2"
+    export CXXFLAGS="${CXXFLAGS} -O1"
 fi
 export CXXFLAGS="${CXXFLAGS} -DNDEBUG"
 
