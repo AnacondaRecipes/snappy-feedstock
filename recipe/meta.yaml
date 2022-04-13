@@ -9,6 +9,8 @@ source:
   - url: https://github.com/google/snappy/archive/{{ version }}.tar.gz
     fn: snappy-{{ version }}.tar.gz
     sha256: {{ sha256 }}
+    patches:
+      - Add_inline.patch
 
   # these are git submodules
   - url: https://github.com/google/benchmark/archive/bf585a2789e30585b4e3ce6baf11ef2750b54677.tar.gz
@@ -32,6 +34,8 @@ requirements:
     - make  # [unix]
     - cmake
     - git
+    - m2-patch   # [win]
+    - patch  # [not win]
   host:
     - msinttypes  # [win and vc<14]
 
