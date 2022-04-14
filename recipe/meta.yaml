@@ -9,7 +9,8 @@ source:
   - url: https://github.com/google/snappy/archive/{{ version }}.tar.gz
     fn: snappy-{{ version }}.tar.gz
     sha256: {{ sha256 }}
-    #patches:
+    patches:  # [win]
+      - fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
       # Have snappy-unittest not run the slow-ish microbenchmarks, but just
       # the quick correctness tests, without bothering with gflags (which didn't
       # work out of the box). This is the recommended method in the README.
@@ -18,7 +19,6 @@ source:
       # the dynamic library, since they have the same suffix there.
       # https://github.com/google/snappy/pull/57
       #- windows-static-lib-name.patch
-
     # these are git submodules
   - url: https://github.com/google/benchmark/archive/bf585a2789e30585b4e3ce6baf11ef2750b54677.tar.gz
     sha256: 8222ebe7d9049c4b8bb3f930e3ca08e232f5587ad4121619f73f6ce374391c70
