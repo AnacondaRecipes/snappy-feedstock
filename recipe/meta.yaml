@@ -12,7 +12,6 @@ source:
     patches:
       - Add_inline.patch
       - fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
-      - use-system-test-libs.patch  # [win]
 
   # these are git submodules
   - url: https://github.com/google/benchmark/archive/bf585a2789e30585b4e3ce6baf11ef2750b54677.tar.gz
