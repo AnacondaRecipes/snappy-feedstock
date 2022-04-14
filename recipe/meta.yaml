@@ -11,6 +11,7 @@ source:
     sha256: {{ sha256 }}
     patches:
       - Add_inline.patch
+      - fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
       - use-system-test-libs.patch  # [win]
 
   # these are git submodules
