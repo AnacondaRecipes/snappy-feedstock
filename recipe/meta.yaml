@@ -1,30 +1,32 @@
-{% set version = "1.1.8" %}
-{% set sha256 = "16b677f07832a612b0836178db7f374e414f94657c138e6993cbfc5dcc58651f" %}
+{% set version = "1.1.9" %}
+{% set sha256 = "75c1fbb3d618dd3a0483bff0e26d0a92b495bbe5059c8b4f1c962b478b6e06e7" %}
 
 package:
   name: snappy
   version: {{ version }}
 
 source:
-  url: https://github.com/google/snappy/archive/{{ version }}.tar.gz
-  fn: snappy-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
-  patches:
-    # Have snappy-unittest not run the slow-ish microbenchmarks, but just
-    # the quick correctness tests, without bothering with gflags (which didn't
-    # work out of the box). This is the recommended method in the README.
-    - skip-microbenchmarks.patch
-    # Name the static library snappy_static.lib on windows, to distinguish from
-    # the dynamic library, since they have the same suffix there.
-    # https://github.com/google/snappy/pull/57
-    - windows-static-lib-name.patch
+  - url: https://github.com/google/snappy/archive/{{ version }}.tar.gz
+    fn: snappy-{{ version }}.tar.gz
+    sha256: {{ sha256 }}
+    patches:
+      - Add_inline.patch
+      - fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
+
+  # these are git submodules
+  - url: https://github.com/google/benchmark/archive/bf585a2789e30585b4e3ce6baf11ef2750b54677.tar.gz
+    sha256: 8222ebe7d9049c4b8bb3f930e3ca08e232f5587ad4121619f73f6ce374391c70
+    folder: third_party/benchmark
+  - url: https://github.com/google/googletest/archive/18f8200e3079b0e54fa00cb7ac55d4c39dcf6da6.tar.gz
+    sha256: d518c1c146c5a87cdedbee8535a396f95d91e8b39baa539fd4c50bd62148d199
+    folder: third_party/googletest
 
 build:
   number: 0
   run_exports:
     # other than a fluke at 1.1.5, it's stable
     #   https://abi-laboratory.pro/tracker/timeline/snappy/
-    - {{ pin_subpackage('snappy') }}
+    - {{ pin_subpackage('snappy', max_pin='x') }}
 
 requirements:
   build:
@@ -32,6 +34,10 @@ requirements:
     - {{ compiler('cxx') }}
     - make  # [unix]
     - cmake
+    - git
+    - m2-patch   # [win]
+    - patch  # [not win]
+  host:
     - msinttypes  # [win and vc<14]
     - patch     # [not win]
     - m2-patch  # [win]
@@ -50,7 +56,7 @@ test:
 
 about:
   home: https://github.com/google/snappy
-  license: BSD 3-clause
+  license: BSD-3-clause AND CC-BY-3.0 AND MIT AND CC-BY AND Public Domain
   license_file: COPYING
   license_family: BSD
   summary: A fast compressor/decompressor
@@ -62,6 +68,7 @@ about:
     inputs, but the resulting compressed files are anywhere from 20% to 100%
     bigger.
   dev_url: https://github.com/google/snappy
+  doc_url: https://github.com/google/snappy/tree/master/docs
 
 extra:
   recipe-maintainers:
