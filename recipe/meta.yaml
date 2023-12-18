@@ -1,5 +1,5 @@
-{% set version = "1.1.9" %}
-{% set sha256 = "75c1fbb3d618dd3a0483bff0e26d0a92b495bbe5059c8b4f1c962b478b6e06e7" %}
+{% set version = "1.1.10" %}
+{% set sha256 = "49d831bffcc5f3d01482340fe5af59852ca2fe76c3e05df0e67203ebbe0f1d90" %}
 
 package:
   name: snappy
@@ -7,26 +7,21 @@ package:
 
 source:
   - url: https://github.com/google/snappy/archive/{{ version }}.tar.gz
-    fn: snappy-{{ version }}.tar.gz
     sha256: {{ sha256 }}
     patches:
-      - Add_inline.patch
+      # - Add_inline.patch
       - fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
-
-  # these are git submodules
-  - url: https://github.com/google/benchmark/archive/bf585a2789e30585b4e3ce6baf11ef2750b54677.tar.gz
-    sha256: 8222ebe7d9049c4b8bb3f930e3ca08e232f5587ad4121619f73f6ce374391c70
-    folder: third_party/benchmark
-  - url: https://github.com/google/googletest/archive/18f8200e3079b0e54fa00cb7ac55d4c39dcf6da6.tar.gz
-    sha256: d518c1c146c5a87cdedbee8535a396f95d91e8b39baa539fd4c50bd62148d199
-    folder: third_party/googletest
+      - 0001-Omit-Werror-during-compilation.patch
+      - 0002-Debundle-gtest-and-gmock.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # other than a fluke at 1.1.5, it's stable
     #   https://abi-laboratory.pro/tracker/timeline/snappy/
     - {{ pin_subpackage('snappy', max_pin='x') }}
+  ignore_run_exports:
+    - gtest
 
 requirements:
   build:
@@ -34,13 +29,12 @@ requirements:
     - {{ compiler('cxx') }}
     - make  # [unix]
     - cmake
-    - git
-    - m2-patch   # [win]
+    - git  # [not win]
+    - m2-patch  # [win]
     - patch  # [not win]
   host:
     - msinttypes  # [win and vc<14]
-    - patch     # [not win]
-    - m2-patch  # [win]
+    - gtest  # We run the tests during the build, so we need gtest
 
 test:
   commands:

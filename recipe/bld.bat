@@ -11,6 +11,7 @@ cmake -G "NMake Makefiles" ^
     -DCMAKE_PREFIX_PATH:PATH="%LIBRARY_PREFIX%" ^
     -DCMAKE_BUILD_TYPE:STRING=Release ^
     -DBUILD_SHARED_LIBS=ON ^
+    -DSNAPPY_BUILD_BENCHMARKS=OFF ^
     ..
 if errorlevel 1 exit 1
 
@@ -36,6 +37,7 @@ cmake -G "NMake Makefiles" ^
     -DCMAKE_BUILD_TYPE:STRING=Release ^
     -DCMAKE_POSITION_INDEPENDENT_CODE=1 ^
     -DBUILD_SHARED_LIBS=OFF ^
+    -DSNAPPY_BUILD_BENCHMARKS=OFF ^
     ..
 if errorlevel 1 exit 1
 
