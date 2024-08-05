@@ -1,5 +1,5 @@
-{% set version = "1.1.10" %}
-{% set sha256 = "49d831bffcc5f3d01482340fe5af59852ca2fe76c3e05df0e67203ebbe0f1d90" %}
+{% set version = "1.2.1" %}
+{% set sha256 = "736aeb64d86566d2236ddffa2865ee5d7a82d26c9016b36218fcc27ea4f09f86" %}
 
 package:
   name: snappy
@@ -9,16 +9,17 @@ source:
   - url: https://github.com/google/snappy/archive/{{ version }}.tar.gz
     sha256: {{ sha256 }}
     patches:
-      # - Add_inline.patch
-      - fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
-      - 0001-Omit-Werror-during-compilation.patch
-      - 0002-Debundle-gtest-and-gmock.patch
+      - patches/fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
+      - patches/0001-Omit-Werror-during-compilation.patch
+      - patches/0002-Debundle-gtest-and-gmock.patch
+      - patches/0004-cmake-add-option-to-enable-disable-RTTI.patch
 
 build:
-  number: 1
+  number: 0
   run_exports:
-    # other than a fluke at 1.1.5, it's stable
+    # other than a fluke at 1.1.5 and 1.2.0, it's stable
     #   https://abi-laboratory.pro/tracker/timeline/snappy/
+    #   https://github.com/google/snappy/releases
     - {{ pin_subpackage('snappy', max_pin='x') }}
   ignore_run_exports:
     - gtest
@@ -34,7 +35,7 @@ requirements:
     - patch  # [not win]
   host:
     - msinttypes  # [win and vc<14]
-    - gtest  # We run the tests during the build, so we need gtest
+    - gtest 1.14 # We run the tests during the build, so we need gtest
 
 test:
   commands:

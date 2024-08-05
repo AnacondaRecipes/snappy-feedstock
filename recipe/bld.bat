@@ -38,6 +38,7 @@ cmake -G "NMake Makefiles" ^
     -DCMAKE_POSITION_INDEPENDENT_CODE=1 ^
     -DBUILD_SHARED_LIBS=OFF ^
     -DSNAPPY_BUILD_BENCHMARKS=OFF ^
+    -DCMAKE_CXX_STANDARD=17 ^
     ..
 if errorlevel 1 exit 1
 

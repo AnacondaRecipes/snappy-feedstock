@@ -22,6 +22,8 @@ function build() {
         -DCMAKE_INSTALL_LIBDIR=lib \
         -DHAVE_LIBZ=FALSE -DHAVE_LIBLZO2=FALSE \
         -DSNAPPY_BUILD_BENCHMARKS=OFF \
+	    -DCMAKE_CXX_STANDARD=17 \
+        -DSNAPPY_ENABLE_RTTI=ON \
         $extra_args
 
     make -j${CPU_COUNT}
