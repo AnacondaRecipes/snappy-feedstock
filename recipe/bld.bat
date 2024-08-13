@@ -12,6 +12,8 @@ cmake -G "NMake Makefiles" ^
     -DCMAKE_BUILD_TYPE:STRING=Release ^
     -DBUILD_SHARED_LIBS=ON ^
     -DSNAPPY_BUILD_BENCHMARKS=OFF ^
+    -DCMAKE_CXX_STANDARD=17 ^
+    -DSNAPPY_ENABLE_RTTI=ON ^
     ..
 if errorlevel 1 exit 1
 
@@ -38,6 +40,8 @@ cmake -G "NMake Makefiles" ^
     -DCMAKE_POSITION_INDEPENDENT_CODE=1 ^
     -DBUILD_SHARED_LIBS=OFF ^
     -DSNAPPY_BUILD_BENCHMARKS=OFF ^
+    -DCMAKE_CXX_STANDARD=17 ^
+    -DSNAPPY_ENABLE_RTTI=ON ^
     ..
 if errorlevel 1 exit 1
 
