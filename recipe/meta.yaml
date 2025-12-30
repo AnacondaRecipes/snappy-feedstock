@@ -1,5 +1,4 @@
-{% set version = "1.2.1" %}
-{% set sha256 = "736aeb64d86566d2236ddffa2865ee5d7a82d26c9016b36218fcc27ea4f09f86" %}
+{% set version = "1.2.2" %}
 
 package:
   name: snappy
@@ -7,12 +6,11 @@ package:
 
 source:
   - url: https://github.com/google/snappy/archive/{{ version }}.tar.gz
-    sha256: {{ sha256 }}
+    sha256: 90f74bc1fbf78a6c56b3c4a082a05103b3a56bb17bca1a27e052ea11723292dc
     patches:
       - patches/fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
       - patches/0001-Omit-Werror-during-compilation.patch
       - patches/0002-Debundle-gtest-and-gmock.patch
-      - patches/0004-cmake-add-option-to-enable-disable-RTTI.patch
 
 build:
   number: 0
