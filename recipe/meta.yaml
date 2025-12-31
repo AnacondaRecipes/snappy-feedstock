@@ -33,6 +33,7 @@ requirements:
     - patch  # [not win]
   host:
     - msinttypes  # [win and vc<14]
+    - lz4-c {{ lz4_c }}  # [linux]
     - gtest 1.14 # We run the tests during the build, so we need gtest
 
 test:
