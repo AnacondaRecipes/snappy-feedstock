@@ -24,13 +24,12 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make  # [unix]
     - cmake
     - git  # [not win]
-    - m2-patch  # [win]
-    - patch  # [not win]
   host:
     - msinttypes  # [win and vc<14]
     - lz4-c {{ lz4_c }}  # [linux]
@@ -50,7 +49,7 @@ test:
 
 about:
   home: https://github.com/google/snappy
-  license: BSD-3-clause AND CC-BY-3.0 AND MIT AND CC-BY AND Public Domain
+  license: BSD-3-Clause AND CC-BY-3.0 AND MIT AND CC-BY AND Public Domain
   license_file: COPYING
   license_family: BSD
   summary: A fast compressor/decompressor
