@@ -1,5 +1,4 @@
-{% set version = "1.2.1" %}
-{% set sha256 = "736aeb64d86566d2236ddffa2865ee5d7a82d26c9016b36218fcc27ea4f09f86" %}
+{% set version = "1.2.2" %}
 
 package:
   name: snappy
@@ -7,12 +6,11 @@ package:
 
 source:
   - url: https://github.com/google/snappy/archive/{{ version }}.tar.gz
-    sha256: {{ sha256 }}
+    sha256: 90f74bc1fbf78a6c56b3c4a082a05103b3a56bb17bca1a27e052ea11723292dc
     patches:
       - patches/fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
       - patches/0001-Omit-Werror-during-compilation.patch
       - patches/0002-Debundle-gtest-and-gmock.patch
-      - patches/0004-cmake-add-option-to-enable-disable-RTTI.patch
 
 build:
   number: 0
@@ -26,15 +24,15 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - make  # [unix]
     - cmake
     - git  # [not win]
-    - m2-patch  # [win]
-    - patch  # [not win]
   host:
     - msinttypes  # [win and vc<14]
+    - lz4-c {{ lz4_c }}  # [linux]
     - gtest 1.14 # We run the tests during the build, so we need gtest
 
 test:
@@ -51,7 +49,7 @@ test:
 
 about:
   home: https://github.com/google/snappy
-  license: BSD-3-clause AND CC-BY-3.0 AND MIT AND CC-BY AND Public Domain
+  license: BSD-3-Clause AND CC-BY-3.0 AND MIT AND CC-BY AND Public Domain
   license_file: COPYING
   license_family: BSD
   summary: A fast compressor/decompressor
