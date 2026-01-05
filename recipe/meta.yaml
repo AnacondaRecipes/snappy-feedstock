@@ -11,9 +11,10 @@ source:
       - patches/fix_win_exports.patch  # [win]  Ensure `snappy_test_support.lib` is built.
       - patches/0001-Omit-Werror-during-compilation.patch
       - patches/0002-Debundle-gtest-and-gmock.patch
+      - patches/0003-cmake-add-option-to-enable-disable-RTTI.patch
 
 build:
-  number: 0
+  number: 1
   run_exports:
     # other than a fluke at 1.1.5 and 1.2.0, it's stable
     #   https://abi-laboratory.pro/tracker/timeline/snappy/
